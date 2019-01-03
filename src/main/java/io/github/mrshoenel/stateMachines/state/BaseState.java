@@ -95,7 +95,7 @@ public class BaseState implements State {
      * Used to determine if this state has a defined transition with the given name.
      * Calls {@link BaseState#hasTransition(String)}.
      *
-     * @param transition
+     * @param transition the {@link Transition} to check for
      * @return boolean true, iff this state has a transition with the given name.
      */
     public boolean hasTransition(@NonNull final Transition transition) {
@@ -112,6 +112,27 @@ public class BaseState implements State {
     public boolean hasTransition(@NonNull final String name) {
         Objects.requireNonNull(name);
         return this.transitions.containsKey(name);
+    }
+
+    /**
+     * Returns a value indicating whether this state has any (outgoing) transitions
+     * defined or not.
+     *
+     * @return boolean
+     */
+    public boolean hasTransitions() {
+        return this.transitions.size() > 0;
+    }
+
+    /**
+     * Overridden to return true for when there are no transitions defined for this
+     * state. In that case, the state cannot be left.
+     *
+     * @return boolean true, iff this state does not have any (outgoing) transitions.
+     */
+    @Override
+    public boolean isFinalState() {
+        return !this.hasTransitions();
     }
 
     /**
