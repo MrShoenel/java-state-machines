@@ -129,6 +129,6 @@ public class BaseState implements State {
      */
     @Override
     public String toString() {
-        return "[" + this.getClass().getSimpleName() + "]: " + this.getName();
+        return "[" + this.getClass().getSimpleName() + ": " + this.getName() + "]";
     }
 }

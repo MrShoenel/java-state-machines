@@ -2,6 +2,7 @@ package io.github.mrshoenel.stateMachines.transition;
 
 
 import io.github.mrshoenel.stateMachines.StateMachineArtifact;
+import io.github.mrshoenel.stateMachines.exception.NoValueSetException;
 
 
 /**
@@ -37,7 +38,9 @@ public interface TransitionArgument<T> extends StateMachineArtifact {
      * Gets the value that was set previously. If a value was previously set can
      * be checked using {@link TransitionArgument#hasValue()}.
      *
+     * @throws NoValueSetException if it is attempted to obtain the value for this
+     * argument. Use {@link TransitionArgument#hasValue()} to check for that.
      * @return the value of type T
      */
-    T getValue();
+    T getValue() throws NoValueSetException;
 }

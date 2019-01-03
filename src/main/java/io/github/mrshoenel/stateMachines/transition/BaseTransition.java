@@ -41,13 +41,13 @@ public class BaseTransition implements Transition {
 
     /**
      * Initializes a new {@link BaseTransition} and generates a name of the
-     * scheme "trans_to" + 'to'-state's class' simple name.
+     * scheme "trans_to_" + 'to'-state's toString()-method.
      *
      * @param fromState
      * @param toState
      */
     public BaseTransition(final State fromState, final State toState) {
-        this("trans_to" + toState.getClass().getSimpleName(), fromState, toState);
+        this("trans_to_" + toState.toString(), fromState, toState);
     }
 
     /**

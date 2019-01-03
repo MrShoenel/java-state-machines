@@ -14,3 +14,6 @@ buildNumber.properties
 # Ignore IDEA-files
 .idea/workspace.xml
 .idea/tasks.xml
+
+# Coverage from tests
+coverage/

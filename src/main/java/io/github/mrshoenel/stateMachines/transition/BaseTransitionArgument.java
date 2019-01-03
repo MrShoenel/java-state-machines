@@ -1,6 +1,8 @@
 package io.github.mrshoenel.stateMachines.transition;
 
 
+import io.github.mrshoenel.stateMachines.exception.NoValueSetException;
+
 /**
  * @param <T> The type of the argument being used in the transition.
  *
@@ -87,9 +89,10 @@ public class BaseTransitionArgument<T> implements TransitionArgument<T> {
      * {@inheritDoc}
      */
     @Override
-    public T getValue() {
-        if (!this.hasValue) {
-            throw new Error("No value has been set for argument'" + this.name + "'.");
+    public T getValue() throws NoValueSetException {
+        if (!this.hasValue()) {
+            throw new NoValueSetException(
+                "No value has been set for argument'" + this.name + "'.");
         }
         return this.value;
     }
@@ -102,6 +105,13 @@ public class BaseTransitionArgument<T> implements TransitionArgument<T> {
      */
     @Override
     public String toString() {
-        return "[TransitionArgument<" + this.getType().getSimpleName() + ">: " + (this.hasValue() ? this.getValue() : "<not value was set>") + "]";
+        String value = null;
+        if (this.hasValue()) {
+            try {
+                value = this.getValue().toString();
+            } catch (NoValueSetException nvse) { }
+        }
+
+        return "[" + this.getClass().getSimpleName() + "<" + this.getType().getSimpleName() + ">: " + (this.hasValue() ? value : "<no value was set>") + "]";
     }
 }
