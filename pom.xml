@@ -21,4 +21,15 @@
     <scm>
         <url>https://github.com/MrShoenel/java-state-machines.git</url>
     </scm>
+
+    <dependencies>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>5.1.3.RELEASE</version>
+        </dependency>
+
+    </dependencies>
 </project>
