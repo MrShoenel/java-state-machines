@@ -22,6 +22,8 @@ public class BaseState implements State {
 
     protected final Map<String, Transition> transitions;
 
+    private final Map<String, Transition> transitionsUnmod;
+
     /**
      * Initializes a new instance of a {@link BaseState}.
      *
@@ -33,13 +35,14 @@ public class BaseState implements State {
 
         this.name = name;
         this.transitions = new HashMap<>();
+        this.transitionsUnmod = Collections.unmodifiableMap(this.transitions);
         this.initialize();
     }
 
     /**
      * Does nothing. Should be overridden when initialization (such as
      * adding transitions on the fly) is required. This method is called
-     * by the constructors.
+     * by the constructor.
      */
     protected void initialize() { }
 
@@ -77,18 +80,20 @@ public class BaseState implements State {
     }
 
     /**
-     * Uses the name of a state to remove it.
+     * Uses the name of a transition to remove it.
      *
      * {@link State#unsetTransition(Transition)}
      * @throws NoSuchTransitionException
      * @return BaseState this for chaining.
      */
-    public BaseState unsetTransition(@NonNull final String name) throws NoSuchTransitionException {
-        if (this.transitions.containsKey(name)) {
-            this.transitions.remove(name);
+    public BaseState unsetTransition(@NonNull final String transitionName) throws NoSuchTransitionException {
+        Objects.requireNonNull(transitionName);
+
+        if (this.transitions.containsKey(transitionName)) {
+            this.transitions.remove(transitionName);
             return this;
         }
-        throw new NoSuchTransitionException("There is no transition with the name '" + name + "'.");
+        throw new NoSuchTransitionException("There is no transition with the name '" + transitionName + "'.");
     }
 
     /**
@@ -136,11 +141,13 @@ public class BaseState implements State {
     }
 
     /**
+     * Returns an unmodifiable map.
+     *
      * {@inheritDoc}
      */
     @Override
     public Map<String, Transition> getAllDefinedTransitions() {
-        return Collections.unmodifiableMap(this.transitions);
+        return this.transitionsUnmod;
     }
 
     /**
