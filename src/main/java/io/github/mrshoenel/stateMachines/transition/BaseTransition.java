@@ -46,8 +46,10 @@ public class BaseTransition implements Transition {
      * @param fromState
      * @param toState
      */
-    public BaseTransition(final State fromState, final State toState) {
-        this("trans_to_" + toState.toString(), fromState, toState);
+    public BaseTransition(@NonNull final State fromState, @NonNull final State toState) {
+        this("trans_to_" + Objects.requireNonNull(toState).toString(),
+            Objects.requireNonNull(fromState),
+            toState);
     }
 
     /**

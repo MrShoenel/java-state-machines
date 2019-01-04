@@ -105,13 +105,6 @@ public class BaseTransitionArgument<T> implements TransitionArgument<T> {
      */
     @Override
     public String toString() {
-        String value = null;
-        if (this.hasValue()) {
-            try {
-                value = this.getValue().toString();
-            } catch (NoValueSetException nvse) { }
-        }
-
-        return "[" + this.getClass().getSimpleName() + "<" + this.getType().getSimpleName() + ">: " + (this.hasValue() ? value : "<no value was set>") + "]";
+        return "[" + this.getClass().getSimpleName() + "<" + this.getType().getSimpleName() + ">: " + (this.hasValue() ? this.value : "<no value was set>") + "]";
     }
 }
