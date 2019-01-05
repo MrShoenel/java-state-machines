@@ -6,7 +6,7 @@
 
     <groupId>io.github.mrshoenel</groupId>
     <artifactId>stateMachines</artifactId>
-    <version>1.1.1</version>
+    <version>1.2.0</version>
     <name>State Machines</name>
     <description>A library for building state machines (DFAs, NFAs etc.) in Java.</description>
 
@@ -65,9 +65,41 @@
                 <version>2.22.1</version>
                 <configuration>
                     <argLine>
-                        --illegal-access=permit
+                        --illegal-access=permit ${argLine}
                     </argLine>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
+                <version>4.3.0</version>
+                <configuration>
+                    <repoToken>7mFRLxWIyJwr2f9ttPRHRpk1D0Fgo9p6A</repoToken>
+                </configuration>
+                <dependencies>
+                    <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
+                    <dependency>
+                        <groupId>javax.xml.bind</groupId>
+                        <artifactId>jaxb-api</artifactId>
+                        <version>2.3.1</version>
+                    </dependency>
+
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.2</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
