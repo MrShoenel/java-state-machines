@@ -4,6 +4,7 @@ import io.github.mrshoenel.stateMachines.exception.IllegalTransitionException;
 import io.github.mrshoenel.stateMachines.state.BaseState;
 import io.github.mrshoenel.stateMachines.transition.dummies.DefaultTransition;
 import io.github.mrshoenel.stateMachines.transition.dummies.DefaultTransition2;
+import io.github.mrshoenel.stateMachines.transition.dummies.TransitionAllowNull;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -53,5 +54,25 @@ public class TestDefaultTransition {
         assertDoesNotThrow(() -> {
             dt.transition();
         });
+    }
+
+    @Test
+    public void testTransitionAllowNull() {
+        var tr = new TransitionAllowNull();
+
+        assertDoesNotThrow(tr::transition);
+
+        var s1 = new BaseState("s1");
+        var s2 = new BaseState("s2");
+
+        tr.setFromState(s1);
+        assertDoesNotThrow(tr::transition);
+
+        tr.setFromState(null);
+        tr.setToState(s2);
+        assertDoesNotThrow(tr::transition);
+
+        tr.setFromState(s1);
+        assertDoesNotThrow(tr::transition);
     }
 }

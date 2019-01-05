@@ -68,8 +68,15 @@ public interface Transition extends StateMachineArtifact {
             }
         }
 
-        this.getFromState().leave(this);
-        this.getToState().enter(this);
+        State from = this.getFromState();
+        if (from instanceof State) {
+            from.leave(this);
+        }
+
+        State to = this.getToState();
+        if (to instanceof State) {
+            to.enter(this);
+        }
     }
 
     /**
