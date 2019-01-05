@@ -12,3 +12,9 @@ Open up your `pom.xml` and add this:
     &lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
   &lt;/dependency&gt;
 </pre>
+
+## Coverage reporting
+This is mostly a note to myself, run following command for all tests, generating jacoco agent and report and submit to coveralls.io:
+<pre>
+mvn clean test jacoco:prepare-agent jacoco:report coveralls:report
+</pre>
