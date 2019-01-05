@@ -1,4 +1,4 @@
-# State Machines
+# State Machines [![Coverage Status](https://coveralls.io/repos/github/MrShoenel/java-state-machines/badge.svg?branch=master)](https://coveralls.io/github/MrShoenel/java-state-machines?branch=master)
 A `Java` library packaged for _maven_ to build state(-ful) machines, such as DFAs or NFAs. Supports transitions, custom arguments for transitions and validation in each state(-machine) of available actions.
 
 Comes unit-tested and contains some examples.
