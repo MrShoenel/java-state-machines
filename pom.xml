@@ -215,9 +215,6 @@
                 <groupId>org.eluder.coveralls</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>4.3.0</version>
-                <configuration>
-                    <repoToken>7mFRLxWIyJwr2f9ttPRHRpk1D0Fgo9p6A</repoToken>
-                </configuration>
                 <dependencies>
                     <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
                     <dependency>
