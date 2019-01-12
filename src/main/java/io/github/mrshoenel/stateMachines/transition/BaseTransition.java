@@ -27,13 +27,10 @@ public class BaseTransition implements Transition {
 
     private final Map<String, TransitionArgument<?>> transitionArgsUnmod;
 
-    public BaseTransition(final String name, @NonNull final State fromState, @NonNull final State toState) {
-        Objects.requireNonNull(fromState);
-        Objects.requireNonNull(toState);
-
-        this.name = name;
-        this.fromState = fromState;
-        this.toState = toState;
+    public BaseTransition(@NonNull final String name, @NonNull final State fromState, @NonNull final State toState) {
+        this.name = Objects.requireNonNull(name);
+        this.fromState = Objects.requireNonNull(fromState);
+        this.toState = Objects.requireNonNull(toState);
         this.transitionArgs = new HashMap<>();
         this.transitionArgsUnmod = Collections.unmodifiableMap(this.transitionArgs);
         this.initialize();
@@ -47,9 +44,7 @@ public class BaseTransition implements Transition {
      * @param toState
      */
     public BaseTransition(@NonNull final State fromState, @NonNull final State toState) {
-        this("trans_to_" + Objects.requireNonNull(toState).toString(),
-            Objects.requireNonNull(fromState),
-            toState);
+        this("trans_to_" + Objects.requireNonNull(toState).toString(), fromState, toState);
     }
 
     /**
