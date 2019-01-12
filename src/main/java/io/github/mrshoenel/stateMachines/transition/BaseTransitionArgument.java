@@ -2,6 +2,9 @@ package io.github.mrshoenel.stateMachines.transition;
 
 
 import io.github.mrshoenel.stateMachines.exception.NoValueSetException;
+import org.springframework.lang.NonNull;
+
+import java.util.Objects;
 
 /**
  * @param <T> The type of the argument being used in the transition.
@@ -25,8 +28,8 @@ public class BaseTransitionArgument<T> implements TransitionArgument<T> {
      * @param name the name of this argument; should be unique within all
      *             arguments for a transition.
      */
-    public BaseTransitionArgument(final T value, final String name) {
-        this((Class<T>) value.getClass(), name);
+    public BaseTransitionArgument(@NonNull final T value, @NonNull final String name) {
+        this((Class<T>) Objects.requireNonNull(value).getClass(), name);
         this.setValue(value);
     }
 
@@ -38,9 +41,9 @@ public class BaseTransitionArgument<T> implements TransitionArgument<T> {
      * @param name the name of this argument; should be unique within all
      *             arguments for a transition.
      */
-    public BaseTransitionArgument(final Class<T> type, final String name) {
-        this.type = type;
-        this.name = name;
+    public BaseTransitionArgument(@NonNull final Class<T> type, @NonNull final String name) {
+        this.type = Objects.requireNonNull(type);
+        this.name = Objects.requireNonNull(name);
         this.unsetValue();
     }
 

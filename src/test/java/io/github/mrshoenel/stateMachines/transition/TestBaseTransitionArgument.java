@@ -20,5 +20,13 @@ public class TestBaseTransitionArgument {
         } catch (Throwable t) {
             throw new Error(t);
         }
+
+        assertThrows(NullPointerException.class, () -> {
+            new BaseTransitionArgument<>((String) null, "arg5");
+        });
+
+        assertDoesNotThrow(() -> {
+            new BaseTransitionArgument<>(5, "myInt");
+        });
     }
 }

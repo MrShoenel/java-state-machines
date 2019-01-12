@@ -31,9 +31,7 @@ public class BaseState implements State {
      *             the entire machine it is part of.
      */
     public BaseState(@NonNull final String name) {
-        Objects.requireNonNull(name);
-
-        this.name = name;
+        this.name = Objects.requireNonNull(name);
         this.transitions = new HashMap<>();
         this.transitionsUnmod = Collections.unmodifiableMap(this.transitions);
         this.initialize();
