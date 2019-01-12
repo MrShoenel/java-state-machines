@@ -6,7 +6,7 @@
 
     <groupId>io.github.mrshoenel</groupId>
     <artifactId>stateMachines</artifactId>
-    <version>1.2.2</version>
+    <version>1.2.3</version>
     <name>State Machines</name>
     <description>A library for building state machines (DFAs, NFAs etc.) in Java.</description>
     <url>https://github.com/MrShoenel/java-state-machines</url>
