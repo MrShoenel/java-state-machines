@@ -28,6 +28,7 @@ public class BaseTransitionArgument<T> implements TransitionArgument<T> {
      * @param name the name of this argument; should be unique within all
      *             arguments for a transition.
      */
+    @SuppressWarnings("unchecked") // sufficiently covered by unit-tests
     public BaseTransitionArgument(@NonNull final T value, @NonNull final String name) {
         this((Class<T>) Objects.requireNonNull(value).getClass(), name);
         this.setValue(value);

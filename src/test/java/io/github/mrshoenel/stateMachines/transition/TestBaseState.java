@@ -2,6 +2,7 @@ package io.github.mrshoenel.stateMachines.transition;
 
 import io.github.mrshoenel.stateMachines.exception.NoSuchTransitionException;
 import io.github.mrshoenel.stateMachines.state.BaseState;
+import io.github.mrshoenel.stateMachines.stateMachine.BaseStateMachine;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,6 +31,20 @@ public class TestBaseState {
 
         assertDoesNotThrow(() -> {
            bs1.unsetTransition(tr1);
+        });
+    }
+
+    @Test
+    public void testForeignBelonging() {
+        var s1 = new BaseState("s1");
+        var s2 = new BaseState("s2");
+
+        s2.setBelongsToMachine(new BaseStateMachine("m1"));
+
+        s1.setTransition(new BaseTransition("tr1", s1, s2));
+
+        assertThrows(Error.class, () -> {
+            s1.getTransitions().get("tr1").transition();
         });
     }
 }
