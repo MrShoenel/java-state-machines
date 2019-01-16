@@ -4,9 +4,11 @@ package io.github.mrshoenel.stateMachines.state;
 import io.github.mrshoenel.stateMachines.StateMachineArtifact;
 import io.github.mrshoenel.stateMachines.exception.NoSuchTransitionException;
 import io.github.mrshoenel.stateMachines.transition.Transition;
+import org.springframework.lang.NonNull;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -25,7 +27,9 @@ public interface State extends StateMachineArtifact {
      *
      * @param usingTransition The {@link Transition} will pass itself in.
      */
-    default void enter(Transition usingTransition) { };
+    default void enter(@NonNull final Transition usingTransition) {
+        Objects.requireNonNull(usingTransition);
+    };
 
     /**
      * Called by {@link Transition} when the state is left. The default
@@ -33,7 +37,9 @@ public interface State extends StateMachineArtifact {
      *
      * @param usingTransition The {@link Transition} will pass itself in.
      */
-    default void leave(Transition usingTransition) { };
+    default void leave(@NonNull final Transition usingTransition) {
+        Objects.requireNonNull(usingTransition);
+    };
 
     /**
      * The default returns false. Override this method to return a value
@@ -64,7 +70,7 @@ public interface State extends StateMachineArtifact {
      * @param transition The Transition to use.
      * @return State this for chaining
      */
-    State setTransition(Transition transition);
+    State setTransition(@NonNull final Transition transition);
 
     /**
      * Unsets a previously set transition, thus entirely removing the
@@ -75,7 +81,7 @@ public interface State extends StateMachineArtifact {
      * @return State this for chaining
      * @throws NoSuchTransitionException
      */
-    State unsetTransition(Transition transition) throws NoSuchTransitionException;
+    State unsetTransition(@NonNull final Transition transition) throws NoSuchTransitionException;
 
     /**
      * A map with all currently defined transitions.
