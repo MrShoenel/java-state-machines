@@ -200,6 +200,32 @@ public class BaseState implements State {
     }
 
     /**
+     * The {@link State#enter(Transition)} method was overriden here, so that we can
+     * check if this state belongs to a {@link BaseStateMachine}. If so, then the
+     * machine will be made aware that this state shall be its current state, by
+     * calling {@link BaseStateMachine#setCurrentState(State)}.
+     *
+     * {@inheritDoc}
+     * @param usingTransition The {@link Transition} will pass itself in.
+     * @exception Error This method throws an {@link Error} with a cause of type
+     * {@link NoSuchStateException}, when this state's belonging machine is not aware
+     * of that fact.
+     */
+    @Override
+    public void enter(Transition usingTransition) {
+        State.super.enter(usingTransition);
+
+        final var machine = this.getBelongsToMachine();
+        if (machine != null) {
+            try {
+                machine.setCurrentState(this);
+            } catch (NoSuchStateException nssEx) {
+                throw new Error(nssEx);
+            }
+        }
+    }
+
+    /**
      * Returns the concrete sub-class' name and the given name.
      *
      * {@inheritDoc}
