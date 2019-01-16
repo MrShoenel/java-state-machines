@@ -1,5 +1,6 @@
 package io.github.mrshoenel.stateMachines.transition;
 
+import io.github.mrshoenel.stateMachines.blackbox.BlackBoxTransition;
 import io.github.mrshoenel.stateMachines.exception.NoSuchArgumentException;
 import io.github.mrshoenel.stateMachines.state.BaseState;
 import org.junit.jupiter.api.Test;
@@ -44,5 +45,20 @@ public class TestBaseTransition {
             tr.setArgument(arg1);
             tr.removeArgument(arg1);
         });
+    }
+
+    @Test
+    public void testBlackBoxTransition() {
+        var tr = new BaseTransition(new BaseState("s1"), new BaseState("s2"));
+        var tr2 = new BaseTransition(tr.getFromState(), tr.getToState());
+
+        var bb1 = new BlackBoxTransition(tr);
+
+        assertEquals(tr.hashCode() ^ 31, bb1.hashCode());
+        assertTrue(new BlackBoxTransition(tr).equals(bb1));
+        // Covers transition with same states, but it's not the same transition
+        assertFalse(new BlackBoxTransition(tr2).equals(bb1));
+
+        assertFalse(bb1.equals(new Object()));
     }
 }
